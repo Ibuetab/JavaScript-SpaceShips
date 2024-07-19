@@ -16,6 +16,7 @@ export function update(){
     //poder moverse inclinado
     //arriba a la izquierda
     
+    
 
 
 

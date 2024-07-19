@@ -8,5 +8,11 @@ export function preload () {
         { frameWidth: 25, frameHeight: 27 }
       )
 
+      this.load.spritesheet(
+        'star2', // <--- id
+        'assets/stars/star.png',
+        { frameWidth: 25, frameHeight: 27 }
+      )
+
    
 }
