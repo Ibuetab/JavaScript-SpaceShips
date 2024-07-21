@@ -32,13 +32,13 @@ export function create () {
     this.fullship = this.physics.add.sprite(100, 800, 'fullship')
     .setOrigin(1, 1)
     .setCollideWorldBounds(true)
-    .setGravityY(-299)
-    .setVelocityY(-1)
+    .setGravityY(-300)
+    
 
 
 
 
-    this.star = this.physics.add.group({
+  /*   this.star = this.physics.add.group({
         key: 'star',
         repeat: 3,
         setXY: { x: generateRandomNumber(random), y: 0, stepX: generateRandomNumber(random)-300 }
@@ -49,23 +49,56 @@ export function create () {
         child.setGravityY(generateRandomNumber(random)-300)
         //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     
+    });  */
+
+
+
+    //Cada dos segundos caen estrellas del cielo
+/*     
+   setInterval(
+    ()=>{
+
+      this.star = this.physics.add.group({
+        key: 'star',
+        repeat: 1,
+        setXY: { x: generateRandomNumber(random), y: 0, stepX: generateRandomNumber(random)-400 }
+    });
+    
+    this.star.children.iterate(function (child) {
+
+        child.setGravityY(generateRandomNumber(random)-300)
+        //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    
     }); 
 
-  
 
     
- 
-  
-/* 
-    this.star = this.physics.add.sprite(generateRandomNumber(random),0, 'star')
-    .setOrigin(0, 1)
-    .setCollideWorldBounds(false)
-    .setGravityY(-295)  
+    }, 2000
+   );
  */
 
     
  
-    this.physics.add.collider(this.fullship, this.star.child)
+    setInterval(
+
+        ()=>{
+            this.star = this.physics.add.sprite(generateRandomNumber(random) -300,0, 'star')
+            .setOrigin(0, 1)
+            .setCollideWorldBounds(false)
+            .setGravityY(-295) 
+
+        },3000
+    )
+
+   /*  this.star = this.physics.add.sprite(generateRandomNumber(random),0, 'star')
+    .setOrigin(0, 1)
+    .setCollideWorldBounds(false)
+    .setGravityY(-295)   */
+ 
+
+    
+ 
+   /*  this.physics.add.collider(this.fullship, this.star.child)
 
     this.physics.add.overlap(this.fullship,this.star.child,collectStar,null,this)
 
@@ -73,7 +106,7 @@ export function create () {
     {
         this.star.child.disableBody(true, true);
         this.fullship.setGravityY(-299).setVelocityY(-1)
-    }
+    } */
 
     //Se crean los controles de teclado
     this.keys = this.input.keyboard.createCursorKeys()
