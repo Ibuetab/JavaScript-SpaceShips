@@ -1,6 +1,7 @@
 export function preload () {
-    this.load.image('fondo', './assets/images/fondo.png')
-    this.load.image('fullship', './assets/ships/full.png')
+    this.load.image('fondo', './assets/images/fondo.png');
+    this.load.image('fullship', './assets/ships//Full/full.png');
+    this.load.image('fullship2', './assets/ships//Full/fullship2.png');
 
     this.load.spritesheet(
         'star', // <--- id

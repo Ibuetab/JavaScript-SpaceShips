@@ -24,7 +24,25 @@ export function create () {
     .setGravityY(-300)
     
     //Creación del grupo de estrellas
-    this.stars = this.physics.add.group(); 
+    this.stars = this.physics.add.group();
+
+
+    //Incializa un sistema de puntuación
+    this.score = 0;
+
+    //Texto con la puntuación
+    this.scoreText = this.add.text(16,16, 'Puntuacion: 0',
+        {
+            fontSize: 20,
+            fontFamily: 'Arial',
+            fill : '#FFF'
+
+        });
+
+
+    //Límite para cambiar la apariencia de la nave
+    this.limit = 3;
+
 
 
     //Caen estrellas por intervalos de tiempo
@@ -51,7 +69,21 @@ export function create () {
     //Función de colisión de la nave con el grupo de estrellas
     function collectStar (fullship,star)
     {
-        star.disableBody(true, true); 
+        star.disableBody(true, true); //Desactiva la estrella
+
+        //Sistema de puntuación
+        this.score += 1;
+        this.scoreText.setText('Puntuacion: ' + this.score) //Muestra el texto con la puntuación
+
+        //Cambio de apariencia de la nave al recoger x numéro de estrellas
+
+
+        if(this.score >= this.limit){
+            this.fullship.setTexture('fullship2');
+            this.fullship.setScale(0.1);
+            this.fullship.body.setSize(this.fullship.width, this.fullship.height, true);
+            
+        }
         
     } 
 
