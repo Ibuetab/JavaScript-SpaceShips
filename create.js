@@ -10,103 +10,54 @@ export function create () {
         }
     }
     
-    //Genera un numero aleatorio de estrellas
-    let randomstars;
-    function generateRandomStars(randomstars){
-        for(let i =0;i<5;i++){
-            let randomstars = Math.random() * 10;
-            return randomstars;
-        }
-    }
 
-
-
-
-
+    //Crea el fondo
     //image(x, y, id)
    this.fondo = this.add.image(100, 50, 'fondo')
     .setOrigin(0.15, 0.1)
     .setScale(1.5)
 
-
+    //Crea la nave
     this.fullship = this.physics.add.sprite(100, 800, 'fullship')
     .setOrigin(1, 1)
     .setCollideWorldBounds(true)
     .setGravityY(-300)
     
+    //Creación del grupo de estrellas
+    this.stars = this.physics.add.group(); 
 
 
+    //Caen estrellas por intervalos de tiempo
+    this.time.addEvent(
+        {
+            delay: 1000,
+            callback: () =>  {
+                let star = this.physics.add.sprite(generateRandomNumber(random) -300,0, 'star')
+                            .setOrigin(0, 1)
+                            .setCollideWorldBounds(false)
+                            .setGravityY(-295)
+
+                this.stars.add(star);
+            },
+
+            loop:true
+
+        });
 
 
-  /*   this.star = this.physics.add.group({
-        key: 'star',
-        repeat: 3,
-        setXY: { x: generateRandomNumber(random), y: 0, stepX: generateRandomNumber(random)-300 }
-    });
-    
-    this.star.children.iterate(function (child) {
+    //Añadir colisión de la nave con el grupo de estrellas
+    this.physics.add.overlap(this.fullship,this.stars,collectStar,null,this) 
 
-        child.setGravityY(generateRandomNumber(random)-300)
-        //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    
-    });  */
-
-
-
-    //Cada dos segundos caen estrellas del cielo
-/*     
-   setInterval(
-    ()=>{
-
-      this.star = this.physics.add.group({
-        key: 'star',
-        repeat: 1,
-        setXY: { x: generateRandomNumber(random), y: 0, stepX: generateRandomNumber(random)-400 }
-    });
-    
-    this.star.children.iterate(function (child) {
-
-        child.setGravityY(generateRandomNumber(random)-300)
-        //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    
-    }); 
-
-
-    
-    }, 2000
-   );
- */
-
-    
- 
-    setInterval(
-
-        ()=>{
-            this.star = this.physics.add.sprite(generateRandomNumber(random) -300,0, 'star')
-            .setOrigin(0, 1)
-            .setCollideWorldBounds(false)
-            .setGravityY(-295) 
-
-        },3000
-    )
-
-   /*  this.star = this.physics.add.sprite(generateRandomNumber(random),0, 'star')
-    .setOrigin(0, 1)
-    .setCollideWorldBounds(false)
-    .setGravityY(-295)   */
- 
-
-    
- 
-   /*  this.physics.add.collider(this.fullship, this.star.child)
-
-    this.physics.add.overlap(this.fullship,this.star.child,collectStar,null,this)
-
+    //Función de colisión de la nave con el grupo de estrellas
     function collectStar (fullship,star)
     {
-        this.star.child.disableBody(true, true);
-        this.fullship.setGravityY(-299).setVelocityY(-1)
-    } */
+        star.disableBody(true, true); 
+        
+    } 
+
+
+
+
 
     //Se crean los controles de teclado
     this.keys = this.input.keyboard.createCursorKeys()
